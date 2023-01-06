@@ -1,0 +1,27 @@
+CREATE TABLE "Prova".tb_pessoa (
+	pessoa_id int NOT NULL,
+	nome varchar(200) NOT NULL,
+	cpf varchar(25) NOT NULL,
+	idade date NULL,
+	sexo char(1) NOT null,
+	PRIMARY KEY (pessoa_id)
+);
+
+CREATE TABLE "Prova".tb_endereco (
+	endereço_id int NOT NULL,
+	tipo varchar(10) NOT NULL,
+	logradouro varchar(250) NOT NULL,
+	número varchar(10) not NULL,
+	complemento varchar(100),
+	cep numeric NOT null,
+	cidade varchar(250) not null,
+	estado char(2) not null,
+	PRIMARY KEY (endereço_id),
+	pessoa_id Serial not null,
+	FOREIGN KEY (pessoa_id) REFERENCES tb_pessoa (pessoa_id)
+);
+
+select tp.pessoa_id, tp.nome , tp.cpf ,tp.idade , tp.sexo, te.tipo ,te.logradouro, te.número , te.complemento ,te.cep ,te.cidade ,te.estado 
+from tb_pessoa tp
+inner join tb_endereco te on tp.pessoa_id = te.pessoa_id ;
+
